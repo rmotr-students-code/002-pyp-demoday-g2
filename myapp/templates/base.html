@@ -1,0 +1,14 @@
+<html>
+<head>
+    {% if title %}
+        <title>{{ app_name }} - {{ title }}</title>
+    {% else %}
+        <title>{{ app_name }}</title>
+    {% endif %}
+</head>
+<body>
+<!--Maybe use a for loop to loop through all pages and make link -->
+    <div><a href="/">Home</a> | <a href="/index">Index</a></div>
+{% block content %}{% endblock %}
+</body>
+</html>

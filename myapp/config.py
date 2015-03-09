@@ -1,0 +1,1 @@
+APP_NAME = 'Social Proximity Web App'

@@ -2,14 +2,27 @@ from myapp import app
 from flask import render_template
 
 app_name = app.config['APP_NAME']
+chosen_media = app.config['CHOSEN_MEDIA']
+
+# Add the name and link for each page we make to this. They will automatically
+# be added to the links at the top. Need to find a way to order them
+page_dict = {}
 
 @app.route('/')
 def home_page():
-    return render_template('home.html', title='Home', app_name=app_name)
+    page_dict['Home'] = '/'
+    return render_template('home.html', title='Home', page_dict=page_dict,
+                           app_name=app_name)
 
 @app.route('/index')
 def index_page():
-    return render_template('index.html', title='Index', app_name=app_name)
+    page_dict['Index'] = '/index'
+    return render_template('index.html', title='Index', page_dict=page_dict,
+                           chosen_media=chosen_media)
+
+# @app.route('/Login')
+# def login():
+#     return
 
 # When debugging is set to off, these pages will show when the respective errors
 # are raised

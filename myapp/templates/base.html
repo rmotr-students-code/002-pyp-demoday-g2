@@ -8,7 +8,11 @@
 </head>
 <body>
 <!--Maybe use a for loop to loop through all pages and make link -->
-    <div><a href="/">Home</a> | <a href="/index">Index</a></div>
+    <div>
+        {% for page in page_dict %}
+            <a href={{ page_dict[page] }}>{{ page }} | </a>
+        {% endfor %}
+    </div>
 {% block content %}{% endblock %}
 </body>
 </html>

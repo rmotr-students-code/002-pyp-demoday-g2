@@ -7,10 +7,11 @@
     {% endif %}
 </head>
 <body>
-<!--Maybe use a for loop to loop through all pages and make link -->
     <div>
         {% for page in page_dict %}
-            <a href={{ page_dict[page] }}>{{ page }} | </a>
+        <!--The STYLE attribute removes the link's underline-->
+            <a href="{{ page_dict[page] }}" STYLE="text-decoration:none">
+                | {{ page }} | </a>
         {% endfor %}
     </div>
 {% block content %}{% endblock %}

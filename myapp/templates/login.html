@@ -1,8 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h3>Please enter Login details</h3>
-    <div><p><input type="string" name="user" value="Username"></p></div>
-    <div><input type="string" name="password" value="Password"></div><br>
-    <div><input type="submit" value="Submit"></div>
+    <h1>Registration Page</h1>
+    <form action="" method="POST" name="'register">
+        {{ form.hidden_tag() }}
+        <p>
+            Please enter your Username:<br>
+            {{ form.username(size=40) }}<br>
+            {% for error in form.username.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %} <br>
+            Please enter your Password:<br>
+            {{ form.password(size=40) }}<br>
+            {% for error in form.password.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %} <br>
+        </p>
+        <p>Remember Me {{ form.remember_me }}</p>
+        <p><input type="submit", value="Register"</p>
+    </form>
 {% endblock %}

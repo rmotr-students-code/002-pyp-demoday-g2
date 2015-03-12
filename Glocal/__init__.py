@@ -1,9 +1,11 @@
 from flask import Flask
 from . import config
+from flask_sqlalchemy import SQLAlchemy
 
-app = Flask("myapp")
+app = Flask("Glocal")
 app.config.from_object(config)
-from Glocal import views
+db = SQLAlchemy(app)
+from Glocal import views, models
 
 # For error logging when debugging is False
 if not app.debug:

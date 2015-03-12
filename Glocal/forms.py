@@ -17,4 +17,3 @@ class RegistrationForm(Form):
     remember_me = BooleanField('Remember Me')
 
 
-

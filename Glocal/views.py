@@ -10,7 +10,7 @@ def setup_page_dict():
     page_dict = collections.OrderedDict()
     page_dict['Home'] = '/'
     page_dict['Index'] = '/index'
-    page_dict['Login'] = 'Login'
+    page_dict['Registration'] = '/Registration'
     return page_dict
 
 
@@ -28,13 +28,13 @@ def index_page():
                            chosen_media=app.config['CHOSEN_MEDIA'])
 
 
-@app.route('/Login', methods=['GET', 'POST'])
-def login():
+@app.route('/Registration', methods=['GET', 'POST'])
+def Registration():
     form = RegistrationForm(request.form)
     if request.method == 'POST' and form.validate():
         flash('The user: {user} was logged in'.format(user=form.username.data))
         return redirect('/')
-    return render_template('login.html', title='Login',
+    return render_template('registration.html', title='Login',
                            page_dict=setup_page_dict(),
                            chosen_media=app.config['CHOSEN_MEDIA'],
                            form=form)

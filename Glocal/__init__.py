@@ -3,7 +3,7 @@ from . import config
 
 app = Flask("myapp")
 app.config.from_object(config)
-from myapp import views
+from Glocal import views
 
 # For error logging when debugging is False
 if not app.debug:

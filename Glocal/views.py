@@ -1,8 +1,7 @@
-from myapp import app
+from Glocal import app
 from flask import render_template, request, flash, redirect
 from .forms import RegistrationForm
 import collections
-
 
 
 def setup_page_dict():

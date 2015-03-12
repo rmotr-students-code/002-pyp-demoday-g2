@@ -5,6 +5,7 @@ import collections
 app_name = app.config['APP_NAME']
 chosen_media = app.config['CHOSEN_MEDIA']
 
+
 def setup_page_dict():
     """Make a dictionary of all the pages in the file for links at the top of
     the web page. Add the name and address of every new page here"""
@@ -13,6 +14,7 @@ def setup_page_dict():
     page_dict['Index'] = '/index'
     page_dict['Login'] = 'Login'
     return page_dict
+
 
 @app.route('/')
 def home_page():
@@ -26,11 +28,13 @@ def index_page():
                            page_dict=setup_page_dict(),
                            chosen_media=chosen_media)
 
+
 @app.route('/Login')
 def login():
     return render_template('login.html', title='Login',
                            page_dict=setup_page_dict(),
                            chosen_media=chosen_media)
+
 
 # When debugging is set to off, these pages will show when the respective errors
 # are raised
@@ -43,3 +47,4 @@ def not_found_error(error):
 def internal_error(error):
     return render_template('500.html', title='Error 500', app_name=app_name), \
            500
+

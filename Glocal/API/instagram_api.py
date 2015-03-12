@@ -3,11 +3,14 @@
 # WEBSITE URL	http://kelseypaulo.blogspot.com/
 # REDIRECT URI	http://kelseypaulo.blogspot.com/
 
+# http://stackoverflow.com/questions/26288687/python-instagram-api-example-not-working
+# https://github.com/Instagram/python-instagram
+
 
 from instagram.client import InstagramAPI
 
-access_token = "YOUR_ACCESS_TOKEN"
+access_token = "3cee2195e2e040a5b77966b3b062fe40"
 api = InstagramAPI(access_token=access_token)
-recent_media, next_ = api.user_recent_media(user_id="userid", count=10)
+recent_media, next_ = api.user_recent_media(user_id="pdgonzalez872", count=10)
 for media in recent_media:
-    print (media.caption.text)
+    print(media.caption.text)

@@ -4,6 +4,7 @@ from .forms import RegistrationForm
 import collections
 
 
+
 def setup_page_dict():
     """Make a dictionary of all the pages in the file for links at the top of
     the web page. Add the name and address of every new page here"""
@@ -38,4 +39,3 @@ def login():
                            page_dict=setup_page_dict(),
                            chosen_media=app.config['CHOSEN_MEDIA'],
                            form=form)
-

@@ -1,9 +1,8 @@
 from myapp import app
-from flask import render_template
+from flask import render_template, request, flash, redirect
+from .forms import RegistrationForm
 import collections
 
-app_name = app.config['APP_NAME']
-chosen_media = app.config['CHOSEN_MEDIA']
 
 
 def setup_page_dict():
@@ -20,31 +19,23 @@ def setup_page_dict():
 def home_page():
     return render_template('home.html', title='Home',
                            page_dict=setup_page_dict(),
-                           app_name=app_name)
+                           app_name=app.config['APP_NAME'])
+
 
 @app.route('/index')
 def index_page():
     return render_template('index.html', title='Index',
                            page_dict=setup_page_dict(),
-                           chosen_media=chosen_media)
+                           chosen_media=app.config['CHOSEN_MEDIA'])
 
 
-@app.route('/Login')
+@app.route('/Login', methods=['GET', 'POST'])
 def login():
+    form = RegistrationForm(request.form)
+    if request.method == 'POST' and form.validate():
+        flash('The user: {user} was logged in'.format(user=form.username.data))
+        return redirect('/')
     return render_template('login.html', title='Login',
                            page_dict=setup_page_dict(),
-                           chosen_media=chosen_media)
-
-
-# When debugging is set to off, these pages will show when the respective errors
-# are raised
-@app.errorhandler(404)
-def not_found_error(error):
-    return render_template('404.html', title='Error 404', app_name=app_name), \
-           404
-
-@app.errorhandler(500)
-def internal_error(error):
-    return render_template('500.html', title='Error 500', app_name=app_name), \
-           500
-
+                           chosen_media=app.config['CHOSEN_MEDIA'],
+                           form=form)

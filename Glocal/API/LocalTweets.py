@@ -9,4 +9,6 @@ api = tweepy.API(auth)
 #temporary address below. To replace with user inputs in html form
 latitude, longitude = GMaps.get_coordinates("1500","Massachusetts","Ave","Washington","DC")
 
-local_tweets = api.search(geocode=str(latitude) + ',' + str(longitude) + ',' + "1mi")
+def get_local_tweets(lat,long):
+    local_tweets = api.search(geocode=str(lat) + ',' + str(long) + ',' + "1mi")
+    return local_tweets

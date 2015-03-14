@@ -8,11 +8,11 @@ auth.set_access_token(Twitter_Token, Twitter_Token_Secret)
 api = tweepy.API(auth)
 
 
-def get_local_tweets(st_num,st_name,st_type,city,state):
+def get_local_tweets(st_num,st_name,st_type,city,state,miles):
     # queries latitude, longitude coordinates from Google Maps API using an address
     latitude, longitude = google_maps.get_coordinates(st_num,st_name,st_type,city,state)
     # queries Tweets using Twitter API 'geocode' coordinates, which takes the parameters "latitude,longitude,radius"
-    local_tweets = (api.search(geocode=str(latitude) + ',' + str(longitude) + ',' + "1mi"))
+    local_tweets = (api.search(geocode=str(latitude) + ',' + str(longitude) + ',' + miles + "mi"))
     lst_local_tweets = []
     # Assembles all of the search results into a list of tweets in the form of "Username: Tweet".
     # Tweets are comprised of 'fields' (tweet, username, shared links, hashtag, etc. For example, tweet.text returns the 'text'
@@ -20,5 +20,3 @@ def get_local_tweets(st_num,st_name,st_type,city,state):
     for tweet in local_tweets:
         lst_local_tweets.append(tweet.user.screen_name + ": " + tweet.text)
     return lst_local_tweets
-
-# print(get_local_tweets("1500","Massachusetts","Avenue","Washington","DC"))

@@ -34,7 +34,8 @@ def index_page():
         st_type = request.form['st_type']
         city = request.form['city']
         state = request.form['state']
-        lst_local_tweets = local_tweets.get_local_tweets(st_num,st_name,st_type,city,state)
+        miles = str(request.form['miles'])
+        lst_local_tweets = local_tweets.get_local_tweets(st_num,st_name,st_type,city,state,miles)
         return render_template('results.html', lst_local_tweets = lst_local_tweets)
 
 @app.route('/Registration', methods=['GET', 'POST'])

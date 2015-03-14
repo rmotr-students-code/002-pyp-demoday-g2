@@ -2,7 +2,7 @@ from Glocal import app
 from flask import render_template, request, flash, redirect
 from .forms import RegistrationForm
 import collections
-
+from Glocal.API import local_tweets
 
 def setup_page_dict():
     """Make a dictionary of all the pages in the file for links at the top of
@@ -21,12 +21,21 @@ def home_page():
                            app_name=app.config['APP_NAME'])
 
 
-@app.route('/index')
+@app.route('/index', methods =['GET','POST'])
 def index_page():
-    return render_template('index.html', title='Index',
+    if request.method == 'GET':
+        return render_template('index.html', title='Index',
                            page_dict=setup_page_dict(),
                            chosen_media=app.config['CHOSEN_MEDIA'])
 
+    elif request.method == 'POST':
+        st_num = request.form['st_name']
+        st_name = request.form['st_num']
+        st_type = request.form['st_type']
+        city = request.form['city']
+        state = request.form['state']
+        lst_local_tweets = local_tweets.get_local_tweets(st_num,st_name,st_type,city,state)
+        return render_template('results.html', lst_local_tweets = lst_local_tweets)
 
 @app.route('/Registration', methods=['GET', 'POST'])
 def Registration():
@@ -38,3 +47,5 @@ def Registration():
                            page_dict=setup_page_dict(),
                            chosen_media=app.config['CHOSEN_MEDIA'],
                            form=form)
+
+

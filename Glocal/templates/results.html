@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <h1> Your search results are shown below.</h1>
+
+    <ul>
+        {% for tweet in lst_local_tweets %}
+        <li>  {{tweet}} </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
+

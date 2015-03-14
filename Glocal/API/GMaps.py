@@ -7,4 +7,3 @@ def get_coordinates(st_num, st_name, st_type, city, state):
     latitude = data['results'][0]['geometry']['location']['lat']
     longitude = data['results'][0]['geometry']['location']['lng']
     return latitude, longitude
-

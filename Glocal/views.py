@@ -2,7 +2,8 @@ from Glocal import app
 from flask import render_template, request, flash, redirect
 from .forms import RegistrationForm
 import collections
-
+import Glocal.API.LocalTweets
+# from Glocal.API import LocalTweets
 
 def setup_page_dict():
     """Make a dictionary of all the pages in the file for links at the top of

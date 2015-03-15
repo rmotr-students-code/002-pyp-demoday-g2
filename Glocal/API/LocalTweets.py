@@ -16,13 +16,17 @@ meaning that is possible to receive tweets which do not include lat/long informa
 # This works
 import GMaps
 import tweepy
+import config_keys # this is where my keys are...
 
-# Guetto fix
-Twitter_API_Key = 'XpP7VNPUUak2YMMjZkW0sKA15'
-Twitter_API_Secret = '2WOkIe7KkZ2B36bVcUsBEZA31LKQqHgCPWJJAF17G3E6ttZXrP'
-Twitter_Token = '776228798-XCOTz36pFolEUeygxt7Os19oY3GgQSaCH2TriwKM'
-Twitter_Token_Secret = 'jn43lDUZEDcoHSxmy20v2oR3EsoBdgXPwUlxni8OzOuUv'
-Google_API = 'AIzaSyDBpDaj4GWXn8ApFULeB0GkvYTLWROpxVA'
+# Guetto fix for not having the instance folder
+a = config_keys.Google_API # change the configs
+Twitter_API_Key = config_keys.Twitter_API_Key
+Twitter_API_Secret = config_keys.Twitter_API_Secret
+Twitter_Token = config_keys.Twitter_Token
+Twitter_Token_Secret = config_keys.Twitter_Token_Secret
+Google_API = config_keys.Google_API
+
+
 
 auth = tweepy.OAuthHandler(Twitter_API_Key, Twitter_API_Secret)
 auth.set_access_token(Twitter_Token, Twitter_Token_Secret)
@@ -43,6 +47,27 @@ def get_local_tweets(lat, long):
     local_tweets = api.search(geocode=str(lat) + ',' + str(long) + ',' + "1mi")
     return local_tweets
 
+
+def get_url_from_tweets_address(st_num, st_name, st_type, city, state):
+    """ Takes in data and gives back list of urls"""
+    url_list = []
+    latitude, longitude = GMaps.get_coordinates(st_num, st_name, st_type, city, state)
+    long_tweet = get_local_tweets(latitude, longitude)
+    for long_message in long_tweet: # can use list comp, but not too worried about it just now
+        url_list.append(long_message.entities['urls'])
+    for url in url_list:
+        if not url:
+            pass
+        else:
+            str_url = str(url).split()
+            # print(str_url[1].replace("'", "").replace(",",""))
+            return str_url[1].replace("'", "").replace(",", "")
+
+
+
+
+
+# testing
 # example data table
 address_list = [("2300", "N Commonwealth", "Ave", "Chicago", "IL"),  # (41.92417200000001, -87.638408)
                 ("419", "Olavo Bilac", "Rua", "Campinas", "Sao Paulo"),  # (-22.8922579, -47.0563872)
@@ -50,10 +75,53 @@ address_list = [("2300", "N Commonwealth", "Ave", "Chicago", "IL"),  # (41.92417
                 ("523", "Rua Afonso de Freitas", "Rua", "Sao Paulo", "Sao Paulo"),  # (-23.5762288, -46.6468314)
                 ]
 
-# prints some data using data from table. Uses both GMaps and also Tweeter
 for st_num, st_name, st_type, city, state in address_list:
-    latitude, longitude = GMaps.get_coordinates(st_num, st_name, st_type, city, state)
-    print(get_local_tweets(latitude, longitude))  # long tweet message...
+    print(get_url_from_tweets_address(st_num, st_name, st_type, city, state))
+
+
+def get_url_from_tweets_lat_long(lat, long):
+    """ Takes in data and gives back list of urls"""
+    pass
+
+
+#########################
+# url_list = []
+# # prints some data using data from table. Uses both GMaps and also Tweeter
+# for st_num, st_name, st_type, city, state in address_list:
+#     latitude, longitude = GMaps.get_coordinates(st_num, st_name, st_type, city, state)
+#     long_tweet = get_local_tweets(latitude, longitude)
+#     for long_message in long_tweet:
+#         # print(i.user.screen_name, "|")#, i.text)
+#         url_list.append(long_message.entities['urls'])
+#         # print(long_message.entities['urls'])
+#
+# for url in url_list:
+#     if not url:
+#         pass
+#     else:
+#         print(url)
+#
+# ########
+
+# variable = get_local_tweets('41.92417200000001', '-87.638408')
+# url_list = []
+# for i in variable:
+#     # print(i.user.screen_name, "|")#, i.text)
+#     # print(i.entities['hashtags'])
+#     #url_list.append(i)  # works
+#     url_list.append(i.entities['urls'])
+#     # print(i.entities['urls'])  # works
+#
+# for url in url_list:
+#     if not url:
+#         pass
+#     else:
+#         print(url)
+# print(len(url_list))
+########################
+
+    # print(get_local_tweets(latitude, longitude))  # long tweet message...
+
     # print(api.geo_id())# id string
     # t = tweepy.StreamListener()  # testing this
     # print(api.trends_closest(latitude, longitude))  # [{'parentid': 23424977, 'url': 'http://where.yahooapis.com/v1/place/2379574', 'country': 'United States', 'woeid': 2379574, 'name': 'Chicago', 'countryCode': 'US', 'placeType': {'code': 7, 'name': 'Town'}}]

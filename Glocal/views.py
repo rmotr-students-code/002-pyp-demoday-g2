@@ -9,24 +9,16 @@ def setup_page_dict():
     the web page. Add the name and address of every new page here"""
     page_dict = collections.OrderedDict()
     page_dict['Home'] = '/'
-    page_dict['Index'] = '/index'
     page_dict['Registration'] = '/Registration'
     return page_dict
 
 
-@app.route('/')
-def home_page():
-    return render_template('home.html', title='Home',
-                           page_dict=setup_page_dict(),
-                           app_name=app.config['APP_NAME'])
-
-
-@app.route('/index', methods =['GET','POST'])
+@app.route('/', methods=['GET','POST'])
 def index_page():
     if request.method == 'GET':
-        return render_template('index.html', title='Index',
+        return render_template('home.html', title='Home',
                            page_dict=setup_page_dict(),
-                           chosen_media=app.config['CHOSEN_MEDIA'])
+                           app_name=app.config['APP_NAME'])
 
     elif request.method == 'POST':
         st_num = request.form['st_name']

@@ -20,3 +20,4 @@ def get_local_tweets(st_num,st_name,st_type,city,state,miles):
     for tweet in local_tweets:
         lst_local_tweets.append(tweet.user.screen_name + ": " + tweet.text)
     return lst_local_tweets
+

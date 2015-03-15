@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
 <!DOCTYPE html>
 
 <html>
@@ -6,14 +9,18 @@
     <title></title>
 </head>
 <body>
-    <h1> Your search results are shown below.</h1>
 
-    <ul>
+    <h1> Check out what your neighbors are tweeting!</h1>
+
+    <div style="border:2px solid black">
+    <ul type="square">
         {% for tweet in lst_local_tweets %}
         <li>  {{tweet}} </li>
         {% endfor %}
     </ul>
+    </div>
 
 </body>
 </html>
 
+{% endblock %}

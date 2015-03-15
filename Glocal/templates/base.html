@@ -5,16 +5,32 @@
     {% else %}
         <title>{{ app_name }}</title>
     {% endif %}
+
+    <link type="text/css" rel="stylesheet" href="/static/stylesheet.css"/>
 </head>
+
 <body>
-    <div>
+<div id="wrapper">
+<div id="header">
+    <img src="http://www.clker.com/cliparts/o/W/n/z/Z/e/neighborhood-cutout-md.png" height="130px" width="150px" id="logo"/>
+        {%if pagetitle%}
+    <h1 id="title"><font face="Georgia" size="25"> {{pagetitle}}</font></h1>
+        {%else%}
+    <h1 id="title"><font face="Georgia" size="25">Welcome to Glocal</font></h1>
+    {%endif%}
+</div>
+
+<br>
+
+<div id="menu">
         {% for page in page_dict %}
         <!--The STYLE attribute removes the link's underline-->
             <a href="{{ page_dict[page] }}" STYLE="text-decoration:none">
                 | {{ page }} | </a>
         {% endfor %}
-    </div>
-    <hr>
+</div>
+
+<hr>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <ul>

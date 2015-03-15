@@ -1,0 +1,36 @@
+wrapper {
+    font: 14px/1.4 'Source Sans Pro', sans-serif;
+    width: 1000px;
+    background-color: #FFF;
+    margin-left: auto;
+    margin-right: auto;
+    border: 10px ridge #0C4700;
+}
+
+header {
+    height: 127px;
+    width: 275px;
+}
+
+logo {
+    padding:5px;
+    position: relative;
+    left: 10px;
+
+}
+
+title {
+    position: relative;
+    width: 700px;
+    left: 260px;
+    top: -160px;
+    color: red;
+}
+
+menu {
+    position:relative;
+    height: 300px;
+    width: 300px;
+
+}
+

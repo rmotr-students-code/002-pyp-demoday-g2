@@ -2,10 +2,7 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 # This is the path of the database file
-SQLALCHEMY_DATABASE_URL = 'sqlite:///' + os.path.join(basedir, 'glocal.db')
-
-# This folder will store the SQLAlchemy-migrate data files
-SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
+SQLALCHEMY_DATABASE_URI = 'sqlite:////' + os.path.join(basedir, 'Database/glocal_user.db')
 
 APP_NAME = 'Glocal'
 CHOSEN_MEDIA = ['Twitter', 'Instagram', 'Yelp', 'Facebook']

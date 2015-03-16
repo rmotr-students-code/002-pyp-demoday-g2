@@ -3,6 +3,7 @@ from flask import render_template, request, flash, redirect
 from .forms import RegistrationForm
 import collections
 from Glocal.API import local_tweets
+from Glocal.API import local_insta
 
 def setup_page_dict():
     """Make a dictionary of all the pages in the file for links at the top of
@@ -28,7 +29,8 @@ def index_page():
         state = request.form['state']
         miles = str(request.form['miles'])
         lst_local_tweets = local_tweets.get_local_tweets(st_num,st_name,st_type,city,state,miles)
-        return render_template('results.html', lst_local_tweets = lst_local_tweets)
+        lst_local_insta = local_insta.get_local_instagram(st_num,st_name,st_type,city,state)
+        return render_template('results.html', lst_local_tweets = lst_local_tweets, lst_local_insta = lst_local_insta)
 
 @app.route('/Registration', methods=['GET', 'POST'])
 def Registration():

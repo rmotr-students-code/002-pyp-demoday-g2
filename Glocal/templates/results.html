@@ -20,6 +20,16 @@
     </ul>
     </div>
 
+    <h1> Check out what your neighbors are posting to Instagram!</h1>
+
+    <div style="border:2px solid black">
+    <ul type="square">
+        {% for pic in lst_local_insta %}
+        <img src= {{pic}}>
+        {% endfor %}
+    </ul>
+    </div>
+
 </body>
 </html>
 

@@ -11,7 +11,7 @@ api = tweepy.API(auth)
 def get_local_tweets(st_num,st_name,st_type,city,state,miles):
     # queries latitude, longitude coordinates from Google Maps API using an address
     latitude, longitude = google_maps.get_coordinates(st_num,st_name,st_type,city,state)
-    # queries Tweets using Twitter API 'geocode' coordinates, which takes the parameters "latitude,longitude,radius"
+    # queries Tweets using Twitter API 'geocode' coordinates, which takes the parameters "latitude,longitude,radius" as strings
     local_tweets = (api.search(geocode=str(latitude) + ',' + str(longitude) + ',' + miles + "mi"))
     lst_local_tweets = []
     # Assembles all of the search results into a list of tweets in the form of "Username: Tweet".

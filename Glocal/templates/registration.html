@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Registration Page</h1>
-    <form action="" method="POST" name="'register">
+
+<br>
+<div>
+    <form class="form" action="" method="POST" name="'register">
+        <h1>Registration Page</h1> <br>
         {{ form.hidden_tag() }}
-        <p>
             Please enter your Username:<br>
             {{ form.username(size=40) }}<br>
             {% for error in form.username.errors %}
@@ -25,8 +27,14 @@
             {% for error in form.last_name.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %} <br>
-        </p>
-        <p>Remember Me {{ form.remember_me }}</p>
-        <p><input type="submit", value="Register"></p>
+        <input type="submit", value="Register">
     </form>
+</div> <br>
+
+<div>
+<form class="form" name="remember_me" action="" method="POST" style="color:white">
+   <input type="checkbox" name="RememberMe" value="Yes" checked> Remember Me <br>
+</div>
+</form>
+
 {% endblock %}

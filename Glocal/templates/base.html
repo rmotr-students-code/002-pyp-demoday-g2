@@ -1,20 +1,38 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />
+
     {% if title %}
         <title>{{ app_name }} - {{ title }}</title>
     {% else %}
         <title>{{ app_name }}</title>
     {% endif %}
 </head>
+
 <body>
-    <div>
-        {% for page in page_dict %}
-        <!--The STYLE attribute removes the link's underline-->
-            <a href="{{ page_dict[page] }}" STYLE="text-decoration:none">
-                | {{ page }} | </a>
-        {% endfor %}
+
+
+
+<div id="page">
+    {% for page in page_dict %}
+    <div class="topNaviagationLink"><a href="{{ page_dict[page] }}" STYLE="text-decoration:none">| {{ page }} |</a></div>
+    {% endfor %}
+</div>
+
+
+<div id="mainPicture">
+   	<div class="picture">
+       	<div id="headerTitle">Welcome to Glocal</div>
+        <div id="headerSubtext">explore your community</div>
     </div>
-    <hr>
+</div>
+
+
+
+<hr>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <ul>

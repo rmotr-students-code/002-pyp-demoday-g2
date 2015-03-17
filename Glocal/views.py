@@ -1,8 +1,9 @@
-from Glocal import app, db
+from Glocal import app
 from flask import render_template, request, flash, redirect
 from .forms import RegistrationForm
-from models import User
 import collections
+from Glocal.API import local_tweets
+from Glocal.API import local_insta
 
 
 def setup_page_dict():
@@ -10,11 +11,11 @@ def setup_page_dict():
     the web page. Add the name and address of every new page here"""
     page_dict = collections.OrderedDict()
     page_dict['Home'] = '/'
-    page_dict['Index'] = '/index'
     page_dict['Registration'] = '/Registration'
     return page_dict
 
 
+<<<<<<< HEAD
 def add_to_database(username, password, first_name, last_name):
     db.create_all()
     db.session.add(User(username, password, first_name, last_name))
@@ -29,23 +30,51 @@ def home_page():
 
 
 @app.route('/index')
+=======
+@app.route('/', methods=['GET', 'POST'])
+>>>>>>> master
 def index_page():
-    return render_template('index.html', title='Index',
-                           page_dict=setup_page_dict(),
-                           chosen_media=app.config['CHOSEN_MEDIA'])
+    if request.method == 'GET':
+        return render_template('home.html', title='Home',
+                               page_dict=setup_page_dict(),
+                               app_name=app.config['APP_NAME'])
+
+    elif request.method == 'POST':
+        st_num = request.form['st_name']
+        st_name = request.form['st_num']
+        st_type = request.form['st_type']
+        city = request.form['city']
+        state = request.form['state']
+        miles = str(request.form['miles'])
+        lst_local_tweets = local_tweets.get_local_tweets(st_num, st_name,
+                                                         st_type, city, state,
+                                                         miles)
+        lst_local_insta = local_insta.get_local_instagram(st_num, st_name,
+                                                          st_type, city, state,
+                                                          miles)
+        return render_template('results.html', title='Home',
+                               page_dict=setup_page_dict(),
+                               app_name=app.config['APP_NAME'],
+                               lst_local_tweets=lst_local_tweets,
+                               lst_local_insta=lst_local_insta)
 
 
 @app.route('/Registration', methods=['GET', 'POST'])
 def registration():
     form = RegistrationForm(request.form)
     if request.method == 'POST' and form.validate():
+<<<<<<< HEAD
         add_to_database(form.username.data, form.password.data,
                         form.first_name.data, form.last_name.data)
         flash('Welcome {first_name}!'.format(first_name=form.first_name.data))
 
+=======
+        flash('The user: {user} was logged in'.format(user=form.username.data))
+>>>>>>> master
         return redirect('/')
     return render_template('registration.html', title='Registration',
                            page_dict=setup_page_dict(),
                            chosen_media=app.config['CHOSEN_MEDIA'],
                            form=form)
+
 

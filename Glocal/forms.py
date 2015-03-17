@@ -1,5 +1,6 @@
-from wtforms import TextField, PasswordField, validators, ValidationError
+from wtforms import TextField, PasswordField, BooleanField, validators
 from flask_wtf import Form
+<<<<<<< HEAD
 from models import User
 import re
 
@@ -19,21 +20,29 @@ def letters_only(form, name):
     """Checks that field only contains letters"""
     if not re.search(r'^[a-zA-Z]*$', name.data):
         raise ValidationError('Name must only contain letters.')
+=======
+>>>>>>> master
 
 
 class RegistrationForm(Form):
     username = TextField('Username', [validators.length(min=4, max=20,
+<<<<<<< HEAD
                         message='Username must be between 4 and 20 characters'),
                                       check_unique])
 
+=======
+                        message='Username must be between 4 and 20 characters')]
+    )
+>>>>>>> master
     # Ensures the password contains at least one number and capital letter
     password = PasswordField('Password',
                              [validators.required(),
                               validators.regexp(
                                   r'([a-z]*[A-Z]+\w*\d+)|([a-z]*\d+\w*[A-Z]+)',
                                 message='Password must alphanumeric and contain'
-                                        ' at least one number and capital letter'
+                                        'at least one number and capital letter'
                               )])
+<<<<<<< HEAD
 
     first_name = TextField('First name',
                            [validators.required(message='Please enter your first'
@@ -43,5 +52,8 @@ class RegistrationForm(Form):
                           [validators.required(message='Please enter your last'
                                                        'name'), letters_only])
 
+=======
+    remember_me = BooleanField('Remember Me')
+>>>>>>> master
 
 

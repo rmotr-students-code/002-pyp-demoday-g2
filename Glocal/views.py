@@ -14,25 +14,13 @@ def setup_page_dict():
     page_dict['Registration'] = '/Registration'
     return page_dict
 
-
-<<<<<<< HEAD
 def add_to_database(username, password, first_name, last_name):
     db.create_all()
     db.session.add(User(username, password, first_name, last_name))
     db.session.commit()
 
 
-@app.route('/')
-def home_page():
-    return render_template('home.html', title='Home',
-                           page_dict=setup_page_dict(),
-                           app_name=app.config['APP_NAME'])
-
-
-@app.route('/index')
-=======
 @app.route('/', methods=['GET', 'POST'])
->>>>>>> master
 def index_page():
     if request.method == 'GET':
         return render_template('home.html', title='Home',
@@ -63,14 +51,9 @@ def index_page():
 def registration():
     form = RegistrationForm(request.form)
     if request.method == 'POST' and form.validate():
-<<<<<<< HEAD
         add_to_database(form.username.data, form.password.data,
                         form.first_name.data, form.last_name.data)
         flash('Welcome {first_name}!'.format(first_name=form.first_name.data))
-
-=======
-        flash('The user: {user} was logged in'.format(user=form.username.data))
->>>>>>> master
         return redirect('/')
     return render_template('registration.html', title='Registration',
                            page_dict=setup_page_dict(),

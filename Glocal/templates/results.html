@@ -1,36 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!DOCTYPE html>
 
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<h1 style="font-family:Adobe Garamond Pro Bold; font-size:24px; text-align:center; color:black"> Check out what your neighbors are tweeting!</h1>
 
-    <h1> Check out what your neighbors are tweeting!</h1>
-
-    <div style="border:2px solid black">
+<div style="border:2px solid black; padding:4px">
     <ul type="square">
         {% for tweet in lst_local_tweets %}
         <li>  {{tweet}} </li>
         {% endfor %}
     </ul>
-    </div>
+</div>
 
-    <h1> Check out what your neighbors are posting to Instagram!</h1>
+<h1 style="font-family:Adobe Garamond Pro Bold; font-size:24px; text-align:center; color:black"> Check out what your neighbors are posting to Instagram!</h1>
 
-    <div style="border:2px solid black">
-    <ul type="square">
-        {% for pic in lst_local_insta %}
-        <img src= {{pic}}>
-        {% endfor %}
-    </ul>
-    </div>
-
-</body>
-</html>
+<div style="border:2px solid black">
+<ul type="square">
+    {% for pic in lst_local_insta %}
+    <img src= {{pic}}>
+    {% endfor %}
+</ul>
+</div>
 
 {% endblock %}

@@ -1,4 +1,4 @@
-from myapp import app
+from Glocal import app
 from flask import render_template
 
 # When debugging is set to off, these pages will show when the respective errors

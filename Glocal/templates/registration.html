@@ -17,7 +17,7 @@
             {% endfor %} <br>
             Please enter your First Name:<br>
             {{ form.first_name(size=40) }}<br>
-            {% for error in form.password.errors %}
+            {% for error in form.first_name.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %} <br>
             Please enter your Last Name:<br>

@@ -10,7 +10,6 @@ def get_coordinates(st_num, st_name, st_type, city, state):
         'https://maps.googleapis.com/maps/api/geocode/json?address=' + st_num +
         '+' + st_name + '+' + st_type + ',+' + city + ',+' + state +
         '&sensor=FALSE' + Google_API)
-
     # Converts the data into readable json format
     data = r.json()
 

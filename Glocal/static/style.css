@@ -119,12 +119,10 @@ background-repeat:repeat-x;
 
 h1
 {
-font-size:25px;
-margin-bottom:10px;
-padding-top:18px;
-margin-left:15px;
-margin-top:15px;
-color:#1F1603;
+font-family:Adobe Garamond Pro Bold;
+font-size:24px;
+text-align:center;
+color:black
 }
 
 .contentText
@@ -168,6 +166,9 @@ color:#000000;
 
 }
 
+li {
+    font-size:16px;
+}
 
 blockquote {
 	font-size:12px;
@@ -181,11 +182,19 @@ blockquote {
 	background-repeat:no-repeat;
 	border:dashed 1px;
 	border-color:#484848;
+
 }
+
+form {
+    font-family:Adobe Garamond Pro Bold;
+    font-size:16px;
+    text-align:center;
+    color:black
+    }
+
+
 
 html, body {
 text-align: center;
 }
 p {text-align: left;}
-
-

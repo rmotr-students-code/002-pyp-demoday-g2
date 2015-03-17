@@ -20,5 +20,3 @@ def get_local_instagram(st_num,st_name,st_type,city,state,miles):
     for media in local_media:
         photos.append(media.images['standard_resolution'].url)
     return photos
-
-# get_local_instagram("1500", "massachusetts","avenue","washington","DC",2)

@@ -15,6 +15,16 @@
             {% for error in form.password.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %} <br>
+            Please enter your First Name:<br>
+            {{ form.first_name(size=40) }}<br>
+            {% for error in form.password.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %} <br>
+            Please enter your Last Name:<br>
+            {{ form.last_name(size=40) }}<br>
+            {% for error in form.last_name.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %} <br>
         </p>
         <p>Remember Me {{ form.remember_me }}</p>
         <p><input type="submit", value="Register"></p>

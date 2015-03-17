@@ -1,24 +1,30 @@
 from wtforms import TextField, PasswordField, validators, ValidationError
 from flask_wtf import Form
 from models import User
+import re
 
 
-def check_username_unique(form, username):
+def check_unique(username):
     """Checks that the username is not already in the database"""
     if user_in_database(username.data):
         raise ValidationError('\'{}\' already chosen. Please choose another '
-                              'username'.format(username.data))
+                              'Username'.format(username.data))
 
 
 def user_in_database(username):
-    if User.query.filter_by(username=username).first():
-        return True
+    return User.query.filter_by(username=username).first()
+
+
+def letters_only(name):
+    """Checks that field only contains letters"""
+    if not re.search(r'^[a-zA-Z]*$', name):
+        raise ValidationError('Name must only contain letters.')
+
 
 
 class RegistrationForm(Form):
     username = TextField('Username', [validators.length(min=4, max=20,
-                        message='Username must be between 4 and 20 characters'),
-                                      check_username_unique])
+                        message='Username must be between 4 and 20 characters')])
 
     # Ensures the password contains at least one number and capital letter
     password = PasswordField('Password',
@@ -28,6 +34,14 @@ class RegistrationForm(Form):
                                 message='Password must alphanumeric and contain'
                                         ' at least one number and capital letter'
                               )])
+
+    first_name = TextField('First name',
+                           [validators.required(message='Please enter your first'
+                                                        'name')])
+
+    last_name = TextField('Last name',
+                          [validators.required(message='Please enter your last'
+                                                       'name')])
 
 
 

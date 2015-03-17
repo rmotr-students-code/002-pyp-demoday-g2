@@ -1,4 +1,4 @@
-from Glocal.instance.config import Twitter_API_Key, Twitter_API_Secret, \
+from instance.config import Twitter_API_Key, Twitter_API_Secret, \
     Twitter_Token, Twitter_Token_Secret
 from Glocal.API import google_maps
 import tweepy

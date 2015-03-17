@@ -1,4 +1,4 @@
-from Glocal.instance.config import Google_API
+from instance.config import Google_API
 import requests
 
 def get_coordinates(st_num, st_name, st_type, city, state):

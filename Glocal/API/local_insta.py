@@ -1,4 +1,4 @@
-from Glocal.instance.config import Insta_Client_ID, Insta_Client_Secret
+from instance.config import Insta_Client_ID, Insta_Client_Secret
 from instagram.client import InstagramAPI
 from Glocal.API import google_maps
 

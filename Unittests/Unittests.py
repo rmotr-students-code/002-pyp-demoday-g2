@@ -1,73 +1,52 @@
-from Glocal.API import google_maps
-from Glocal.API import local_tweets
-from Glocal.API import local_insta
+from Glocal.API import API
 import unittest
 
-
-class TestGMapsAPI(unittest.TestCase):
+class TestGetCoordinates(unittest.TestCase):
     def setUp(self):
         self.st_num = "1500"
         self.st_name = "Massachusetts"
         self.st_type = "Avenue"
         self.city = "Washington"
         self.state = "DC"
+        user_query = API.GlocalAPI(self.st_num, self.st_name, self.st_type,
+                                   self.city, self.state)
+        self.latitude, self.longitude = user_query.get_coordinates()
 
     def test_get_coordinates(self):
-        self.assertEqual((google_maps.get_coordinates(self.st_num, self.st_name,
-                                                      self.st_type, self.city,
-                                                      self.state)),
+        self.assertEqual((self.latitude,self.longitude),
                          (38.9064936, -77.03541179999999))
 
-
-class TestLocalTweetsAPI(unittest.TestCase):
+class TestGetTweets(unittest.TestCase):
     def setUp(self):
         self.st_num = "1500"
         self.st_name = "Massachusetts"
         self.st_type = "Avenue"
         self.city = "Washington"
         self.state = "DC"
-        self.miles = "1"
-
-    def test_local_tweets(self):
-        self.assertIsNotNone(local_tweets.get_local_tweets(self.st_num,
-                                                          self.st_name,
-                                                          self.st_type,
-                                                          self.city,
-                                                          self.state))
+        self.user_query = API.GlocalAPI(self.st_num, self.st_name, self.st_type,
+                                        self.city, self.state)
+    def test_get_tweets(self):
+        self.assertIsNotNone(self.user_query.get_tweets())
 
     def test2_local_tweets(self):
-        self.assertTrue(len(local_tweets.get_local_tweets(self.st_num,
-                                                          self.st_name,
-                                                          self.st_type,
-                                                          self.city,
-                                                          self.state,
-                                                          self.miles)) > 1)
+        self.assertTrue(len(self.user_query.get_tweets()) > 1)
 
-class TestLocalInstagramAPI(unittest.TestCase):
-
+class TestGetInstagram(unittest.TestCase):
     def setUp(self):
         self.st_num = "1500"
         self.st_name = "Massachusetts"
         self.st_type = "Avenue"
         self.city = "Washington"
         self.state = "DC"
-        self.miles = "1"
+        self.user_query = API.GlocalAPI(self.st_num, self.st_name, self.st_type,
+                                        self.city, self.state)
 
-    def test_local_insta(self):
-        self.assertIsNotNone(local_insta.get_local_instagram(self.st_num,
-                                                             self.st_name,
-                                                             self.st_type,
-                                                             self.city,
-                                                             self.state,
-                                                             self.miles))
+    def test_get_instagram(self):
+        self.assertIsNotNone(self.user_query.get_instagram())
 
-    def test2_local_insta(self):
-        self.assertTrue(len(local_insta.get_local_instagram(self.st_num,
-                                                            self.st_name,
-                                                            self.st_type,
-                                                            self.city,
-                                                            self.state,
-                                                            self.miles)) > 1)
+    def test2_get_instagram(self):
+        self.assertTrue(len(self.user_query.get_instagram()) > 1)
+
 
 if __name__ == '__main__':
     unittest.main()

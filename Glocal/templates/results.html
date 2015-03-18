@@ -3,27 +3,31 @@
 {% block content %}
 
 <br>
-<h1> Check out what your neighbors are tweeting!</h1>
-<br>
 
-<div style="border:2px solid black; padding:4px">
-    <ul type="square">
-        {% for tweet in lst_local_tweets %}
-        <li class="li">  {{tweet}} </li>
-        {% endfor %}
-    </ul>
+<div style="border:2px solid black"> <br>
+<h1> Check out what your neighbors are tweeting!</h1> <br>
+
+<table align="center" border="1" rules="rows">
+    {% for tweet in lst_local_tweets %}
+  <tr>
+      <td> <img src={{tweet.user.profile_image_url}}> </td>
+      <td> <strong> {{tweet.user.screen_name }}: </strong> </td>
+      <td> {{tweet.text }} </td>
+       {% endfor %}
+  </tr>
+</table>
+
+
 </div>
 
 <br>
-<h1> Check out what your neighbors are posting to Instagram!</h1>
-<br>
 
-<div style="border:2px solid black">
-<ul type="square">
+<div style="border:2px solid black"> <br>
+    <h1> Check out what your neighbors are posting to Instagram!</h1> <br>
+    <ul type="square">
     {% for pic in lst_local_insta %}
     <img src= {{pic}}>
     {% endfor %}
 </ul>
-</div>
 
 {% endblock %}

@@ -2,8 +2,7 @@ from Glocal import app
 from flask import render_template, request, flash, redirect
 from .forms import RegistrationForm
 import collections
-from Glocal.API import local_tweets
-from Glocal.API import local_insta
+from Glocal.API import local_tweets, local_insta
 
 
 def setup_page_dict():
@@ -37,6 +36,7 @@ def index_page():
         lst_local_tweets = local_tweets.get_local_tweets(st_num, st_name,
                                                          st_type, city, state,
                                                          miles)
+
         lst_local_insta = local_insta.get_local_instagram(st_num, st_name,
                                                           st_type, city, state,
                                                           miles)

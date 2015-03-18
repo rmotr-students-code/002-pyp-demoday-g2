@@ -5,7 +5,7 @@ body {
 	font-family:"Adobe Garamond Pro Bold", Georgia, "Times New Roman", Times, serif;
 	font-size: 13px;
 	color: #000000;
-	background: #000000 url(background.png);
+	background: white;
 	background-repeat:repeat-x;
 }
 *
@@ -191,8 +191,6 @@ form {
     text-align:center;
     color:black
     }
-
-
 
 html, body {
 text-align: center;

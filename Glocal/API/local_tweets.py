@@ -24,8 +24,8 @@ def get_local_tweets(st_num,st_name,st_type,city,state,miles):
     # shared links, hashtag, etc. For example, tweet.text returns the 'text'
     # field of the tweet, tweet.user.screen_name returns the screen name of the
     # tweeter.
-
     for tweet in local_tweets:
-        lst_local_tweets.append(tweet.user.screen_name + ": " + tweet.text)
+        lst_local_tweets.append(tweet)
     return lst_local_tweets
+
 

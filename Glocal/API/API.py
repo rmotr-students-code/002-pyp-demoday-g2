@@ -88,6 +88,7 @@ class GlocalAPI:
             photos.append(media.images['standard_resolution'].url)
         return photos
 
+
     def __str__(self):  # , st_num, st_name, st_type, city, state, miles):
         """
         String representation of class

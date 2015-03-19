@@ -8,16 +8,29 @@
 <h1> Check out what your neighbors are tweeting!</h1> <br>
 
 <table align="center" border="1" rules="rows">
+    <tr>
+        <th class="th"> </th>
+        <th class="th">Screen Name</th>
+        <th class="th">Tweet</th>
+        <th class="th">Shared Link</th>
+    </tr>
+
     {% for tweet in lst_local_tweets %}
   <tr>
       <td> <img src={{tweet.user.profile_image_url}}> </td>
       <td> <strong> {{tweet.user.screen_name }}: </strong> </td>
       <td> {{tweet.text }} </td>
-       {% endfor %}
+
+      {% if tweet.entities.urls|length > 0 %}
+      <td> <a href="http://{{tweet.entities.urls[0].display_url}}">
+          {{tweet.entities.urls[0].display_url}} </a></td>
+      {% else %}
+      <td> </td>
+      {% endif %}
+
+      {% endfor %}
   </tr>
 </table>
-
-
 </div>
 
 <br>

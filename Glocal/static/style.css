@@ -192,6 +192,10 @@ form {
     color:black
     }
 
+th {
+    font-size:16px;
+    }
+
 html, body {
 text-align: center;
 }

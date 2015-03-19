@@ -1,7 +1,8 @@
 from Glocal import db
-from sqlalchemy.ext.declarative import declarative_base
+# from sqlalchemy.ext.declarative import declarative_base
 
-Base = declarative_base()
+# Base = declarative_base()
+
 
 class User(db.Model):
     id = db.Column(db.Integer, autoincrement=1, primary_key=True)

@@ -1,6 +1,8 @@
-from wtforms import TextField, PasswordField, BooleanField, validators
+from wtforms import TextField, PasswordField, validators, ValidationError
 from flask_wtf import Form
+from flask import flash
 from models import User
+from Glocal import db
 import re
 
 
@@ -12,7 +14,15 @@ def check_unique(form, field):
 
 
 def user_in_database(username):
-    return User.query.filter_by(username=username).first()
+    """Checks to see if user is already in database"""
+    try:
+        User.query.filter_by(username=username).first()
+        flash('Database is not empty, success!')
+
+    # If the database is empty, then it cannot search for usernames. If it's
+    # empty, then the username must be unique.
+    except:
+        flash('Database is empty')
 
 
 def letters_only(form, name):

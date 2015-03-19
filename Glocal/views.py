@@ -1,9 +1,9 @@
-from Glocal import app
+from Glocal import app, db
 from flask import render_template, request, flash, redirect
 from .forms import RegistrationForm
 import collections
 from Glocal.API import API
-
+from models import User
 
 def setup_page_dict():
     """Make a dictionary of all the pages in the file for links at the top of
@@ -13,9 +13,11 @@ def setup_page_dict():
     page_dict['Registration'] = '/Registration'
     return page_dict
 
+
 def add_to_database(username, password, first_name, last_name):
     db.create_all()
-    db.session.add(User(username, password, first_name, last_name))
+    db.session.add(User(username=username, password=password,
+                        first_name=first_name, last_name=last_name))
     db.session.commit()
 
 

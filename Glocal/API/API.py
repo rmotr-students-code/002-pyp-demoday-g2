@@ -1,8 +1,9 @@
 import requests
 from instagram.client import InstagramAPI
 import tweepy
-from instance.config import Google_API, Insta_Client_ID, Insta_Client_Secret
-from instance.config import Twitter_API_Key, Twitter_API_Secret, \
+from Glocal.instance.config import Google_API, Insta_Client_ID, \
+    Insta_Client_Secret
+from Glocal.instance.config import Twitter_API_Key, Twitter_API_Secret, \
                             Twitter_Token, Twitter_Token_Secret
 
 class GlocalAPI:

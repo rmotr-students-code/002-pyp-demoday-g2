@@ -5,29 +5,34 @@
 <br>
 <div>
     <form class="form" method='POST'>
-        <h1> Please enter your address below.</h1> <br>
-        Street Number <br>
-        <input type='text' name='st_num' value="123...">
+        <h1> Please enter your address below.</h1>
+
         <br>
-        Street Name <br>
-        <input type='text' name='st_name' value="Main...">
-        <br>
-        Street Type <br>
-        <input type='text' name='st_type' value="Avenue...">
-        <br>
-        City <br>
-        <input type='text' name='city' value="New York City...">
-        <br>
-        State or Country <br>
-        <input type='text' name='state' value="New York...">
-        <br>
-        Radius (in miles) <br>
-        <input type='number' name='miles' value="1">
+
+        <div style="margin-left:550px">
+        Address:
+        <input type='text' name='st_address' value="123 Main Street..." size="25">
+
         <br> <br>
-        <input type='submit' value='Submit'>
+
+        City:
+        <input type='text' name='city' value="New York City...">
+
+        <br> <br>
+
+        State or Country:
+        <input type='text' name='state' value="New York...">
+
+        <br> <br>
+
+        Radius (in miles):
+        <input type='text' name='miles' value="1" size="3">
+
+        <br> <br>
+        <input type='submit' value='Submit' style="margin-left:100px">
+
+        </div>
     </form>
 </div>
-
-<!--Make this a drop down box with a checklist?-->
 
 {% endblock %}

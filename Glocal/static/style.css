@@ -189,11 +189,16 @@ form {
     font-family:Adobe Garamond Pro Bold;
     font-size:16px;
     text-align:center;
-    color:black
+    color:black;
     }
 
 th {
     font-size:16px;
+    }
+
+label {
+    margin-bottom: 200px;
+    margin-top: 200px;
     }
 
 html, body {

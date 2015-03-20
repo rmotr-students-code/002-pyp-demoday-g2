@@ -3,13 +3,10 @@ import unittest
 
 class TestAPI(unittest.TestCase):
     def setUp(self):
-        self.st_num = "1500"
-        self.st_name = "Massachusetts"
-        self.st_type = "Avenue"
+        self.st_address = "1500 Massachusetts Ave NW"
         self.city = "Washington"
         self.state = "DC"
-        self.user_query = API.GlocalAPI(self.st_num, self.st_name, self.st_type,
-                                        self.city, self.state)
+        self.user_query = API.GlocalAPI(self.st_address,self.city, self.state)
         self.latitude, self.longitude = self.user_query.get_coordinates()
 
     def test_get_coordinates(self):

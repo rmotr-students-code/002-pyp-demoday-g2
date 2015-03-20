@@ -27,14 +27,11 @@ def index_page():
                                app_name=app.config['APP_NAME'])
 
     elif request.method == 'POST':
-        st_num = request.form['st_name']
-        st_name = request.form['st_num']
-        st_type = request.form['st_type']
+        st_address = request.form['st_address']
         city = request.form['city']
         state = request.form['state']
         miles = str(request.form['miles'])
-        user_query = API.GlocalAPI(st_num, st_name, st_type,
-                                   city, state, miles)
+        user_query = API.GlocalAPI(st_address, city, state, miles)
         lst_local_tweets = user_query.get_tweets()
         lst_local_insta = user_query.get_instagram()
         return render_template('results.html', title='Home',

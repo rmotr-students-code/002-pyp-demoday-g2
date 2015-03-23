@@ -11,6 +11,7 @@ def setup_page_dict():
     page_dict = collections.OrderedDict()
     page_dict['Home'] = '/'
     page_dict['Registration'] = '/Registration'
+    page_dict['Contact'] = '/Contact'
     return page_dict
 
 
@@ -32,7 +33,7 @@ def index_page():
         st_address = request.form['st_address']
         city = request.form['city']
         state = request.form['state']
-        miles = str(request.form['miles'])
+        miles = request.form['miles']
         user_query = API.GlocalAPI(st_address, city, state, miles)
         lst_local_tweets = user_query.get_tweets()
         lst_local_insta = user_query.get_instagram()
@@ -40,7 +41,10 @@ def index_page():
                                page_dict=setup_page_dict(),
                                app_name=app.config['APP_NAME'],
                                lst_local_tweets=lst_local_tweets,
-                               lst_local_insta=lst_local_insta)
+                               lst_local_insta=lst_local_insta,
+                               st_address = st_address,
+                               city = city,
+                               state = state)
 
 @app.route('/Registration', methods=['GET', 'POST'])
 def registration():

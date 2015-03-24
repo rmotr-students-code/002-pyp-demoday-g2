@@ -102,7 +102,7 @@ class GlocalAPI:
         places = dict()
         for i in range(len(trending_venues["venues"])):
             places[trending_venues["venues"][i]["name"]] = \
-                trending_venues["venues"][0]["hereNow"]["summary"]
+                trending_venues["venues"][i]["hereNow"]["summary"]
         return places
 
 
@@ -115,4 +115,3 @@ class GlocalAPI:
             self.city,
             self.state,
             self.miles)
-

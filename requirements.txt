@@ -21,9 +21,7 @@ linecache2==1.0.0
 oauthlib==0.7.2
 poster==0.8.1
 httplib2==0.9
-linecache2==1.0.0
 oauthlib==0.7.2
 pip==1.5.6
 poster==0.8.1
 requests-oauthlib==0.4.2
-setuptools==3.6

@@ -4,6 +4,11 @@ from .forms import RegistrationForm
 import collections
 from Glocal.API import API
 from models import User
+import os
+
+def index(request):
+    times = int(os.environ.get('TIMES', 3))
+    return HttpResponse('Hello!' * times)
 
 def setup_page_dict():
     """Make a dictionary of all the pages in the file for links at the top of

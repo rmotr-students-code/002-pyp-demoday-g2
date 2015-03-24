@@ -2,11 +2,19 @@ import requests
 from instagram.client import InstagramAPI
 import foursquare
 import tweepy
-from instance.config import Google_API, Insta_Client_ID, \
-    Insta_Client_Secret
-from instance.config import Twitter_API_Key, Twitter_API_Secret, \
-                            Twitter_Token, Twitter_Token_Secret, \
-                            FrSquare_Client_ID, FrSquare_Client_Secret
+
+Twitter_API_Key = 'XpP7VNPUUak2YMMjZkW0sKA15'
+Twitter_API_Secret = '2WOkIe7KkZ2B36bVcUsBEZA31LKQqHgCPWJJAF17G3E6ttZXrP'
+Twitter_Token = '776228798-XCOTz36pFolEUeygxt7Os19oY3GgQSaCH2TriwKM'
+Twitter_Token_Secret = 'jn43lDUZEDcoHSxmy20v2oR3EsoBdgXPwUlxni8OzOuUv'
+
+Google_API = 'AIzaSyDBpDaj4GWXn8ApFULeB0GkvYTLWROpxVA'
+
+Insta_Client_ID = "ed547816012648db9011d08fc0df709f"
+Insta_Client_Secret = "d7e8ffe769074807b630942796d8d0d7"
+
+FrSquare_Client_ID ="0CVJC4C44DABYTEWSG3DR54AIFAK53NZJ3KVZL1B0CBZXVSE"
+FrSquare_Client_Secret = "FTJZCTBXGVA4FGFULBSW11HZECTU3Z3SSYSDLCWED3IYAROT"
 
 class GlocalAPI:
     def __init__(self, st_address, city, state, miles='1'):

@@ -37,11 +37,13 @@ def index_page():
         user_query = API.GlocalAPI(st_address, city, state, miles)
         lst_local_tweets = user_query.get_tweets()
         lst_local_insta = user_query.get_instagram()
+        lst_four_square = user_query.get_four_square()
         return render_template('results.html', title='Home',
                                page_dict=setup_page_dict(),
                                app_name=app.config['APP_NAME'],
                                lst_local_tweets=lst_local_tweets,
                                lst_local_insta=lst_local_insta,
+                               lst_four_square=lst_four_square,
                                st_address = st_address,
                                city = city,
                                state = state)

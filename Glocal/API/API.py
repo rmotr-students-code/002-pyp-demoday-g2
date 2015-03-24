@@ -1,10 +1,12 @@
 import requests
 from instagram.client import InstagramAPI
+import foursquare
 import tweepy
 from instance.config import Google_API, Insta_Client_ID, \
     Insta_Client_Secret
 from instance.config import Twitter_API_Key, Twitter_API_Secret, \
-                            Twitter_Token, Twitter_Token_Secret
+                            Twitter_Token, Twitter_Token_Secret, \
+                            FrSquare_Client_ID, FrSquare_Client_Secret
 
 class GlocalAPI:
     def __init__(self, st_address, city, state, miles='1'):
@@ -70,19 +72,38 @@ class GlocalAPI:
         # established link to Instagram using client ID and client secret
         instagram_api = InstagramAPI(client_id=Insta_Client_ID,
                                      client_secret=Insta_Client_Secret)
+        # converts user's miles radius input into km
+        dist_meters = str(float(self.miles) * 1.60934)
         # queries instagram images using Instagram API with geographic param
         # latitude and longitude as floats, and radius as a string
         local_media = instagram_api.media_search(count=20,
                                                  lat=self.latitude,
                                                  lng=self.longitude,
-                                                 distance=self.miles + "km")
+                                                 distance=dist_meters + "km")
 
         # appends list of image links to 'photos' list. The image links are to
         # 'standard resolution' versions of images, not thumbnails.
         photos = []
         for media in local_media:
-            photos.append(media.images['standard_resolution'].url)
+            photos.append(media.images['low_resolution'].url)
         return photos
+
+
+    def get_four_square(self):
+        # Construct the client object
+        client = foursquare.Foursquare(client_id=FrSquare_Client_ID,
+                                       client_secret=FrSquare_Client_Secret)
+        # converts user's miles radius input into meters
+        dist_meters = str(float(self.miles) * 1603.34)
+        trending_venues = client.venues.trending(params=
+                                                 {'ll': str(self.latitude) + ','
+                                                        + str(self.longitude),
+                                                  'radius': dist_meters})
+        places = dict()
+        for i in range(len(trending_venues["venues"])):
+            places[trending_venues["venues"][i]["name"]] = \
+                trending_venues["venues"][0]["hereNow"]["summary"]
+        return places
 
 
     def __str__(self):  # , st_num, st_name, st_type, city, state, miles):

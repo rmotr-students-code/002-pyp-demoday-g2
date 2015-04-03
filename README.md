@@ -14,9 +14,13 @@ radius as a number (e.g., 0.5,1, 2, 2.5, etc.), and hit submit. </p>
 
 <li> Add user registration page to store address information and desired social
 media results </li>
+
 <li> Improve layout to be more user-friendly and easier to navigate </li>
+
 <li> Add navigation bar to 'results' page to allow easy scrolling from one 
 media to another </li>
+
 <li> Improve unittest suite and exception handling </li>
+
 
 

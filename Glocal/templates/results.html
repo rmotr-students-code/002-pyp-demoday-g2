@@ -4,7 +4,7 @@
 
     <!-- Map -->
 <section id="contact" class="map" align="center">
-    <iframe width="100%" height="50%" frameborder="0" scrolling="yes"
+    <iframe width="100%" height="100%" frameborder="0" scrolling="yes"
             marginheight="0" marginwidth="0"
             src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;
             geocode=&amp;q={{st_address}}{{city}}{{state}}&amp;
@@ -29,6 +29,7 @@
                     <h2>Which Social Media Should We Explore First?</h2>
                     <hr class="small">
                     <div class="row">
+
                         <div class="col-md-3 col-sm-6">
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
@@ -41,6 +42,7 @@
                                 <a href="#twitter" class="btn btn-light">Let's see!</a>
                             </div>
                         </div>
+
                         <div class="col-md-3 col-sm-6">
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
@@ -53,6 +55,7 @@
                                 <a href="#instagram" class="btn btn-light">Let's see!</a>
                             </div>
                         </div>
+
                         <div class="col-md-3 col-sm-6">
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
@@ -65,6 +68,19 @@
                                 <a href="#four_square" class="btn btn-light">Let's see!</a>
                             </div>
                         </div>
+
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                    <img src="/static/img/lastfm2.png" height="100%" width="100%">
+                                </span>
+                                <h4>
+                                    <strong>Events</strong>
+                                </h4>
+                                <p>What local events are planned?</p>
+                                <a href="#events" class="btn btn-light">Let's see!</a>
+                            </div>
+                        </div>
                     </div>
                     <!-- /.row (nested) -->
                 </div>
@@ -75,38 +91,51 @@
         <!-- /.container -->
     </section>
 
-<div name="twitter" style="border:2px solid black" align="center"> <br>
-<h1> Check out what your neighbors are tweeting!</h1> <br>
-    <table align="center" border="1" rules="rows">
-    <tr>
-        <th class="th"> </th>
-        <th class="th">Screen Name</th>
-        <th class="th">Tweet</th>
-        <th class="th">Shared Link</th>
-    </tr>
-
-    {% for tweet in lst_local_tweets %}
-  <tr>
-      <td> <img src={{tweet.user.profile_image_url}}> </td>
-      <td> <strong> {{tweet.user.screen_name }}: </strong> </td>
-      <td> {{tweet.text }} </td>
-
-      {% if tweet.entities.urls|length > 0 %}
-      <td> <a href="http://{{tweet.entities.urls[0].display_url}}">
-          {{tweet.entities.urls[0].display_url}} </a></td>
-      {% else %}
-      <td> </td>
-      {% endif %}
-
-      {% endfor %}
-  </tr>
-</table>
+<div name="twitter" class="container" align="center"> <br>
+    <h1 style="text-align:center; background-color:#337ab7; color:white"> Twitter</h1> <br>
+    <table class="table-condensed table-responsive" style="white-space: nowrap" align="center">
+        <h3> These topics are trending right now</h3>
+        <tbody>
+        {% for topics in lst_trending_tweets %}
+        <tr>
+            <td align="center"> {{ topics }} </td>
+            {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <table class="table-striped table-condensed table-responsive">
+        <h3> Check out these recent tweets</h3>
+        <thread>
+            <tr>
+                <th class="th"> </th>
+                <th class="th">Screen Name</th>
+                <th class="th">Recent Tweet</th>
+                <th class="th">Shared Link</th>
+            </tr>
+        </thread>
+        <tbody>
+        {% for tweet in lst_local_tweets %}
+        <tr>
+            <td> <img src={{tweet.user.profile_image_url}}> </td>
+            <td> <strong> {{tweet.user.screen_name }}: </strong> </td>
+            <td> {{tweet.text }} </td>
+            {% if tweet.entities.urls|length > 0 %}
+            <td> <a href="http://{{tweet.entities.urls[0].display_url}}">
+                {{tweet.entities.urls[0].display_url}} </a></td>
+            {% else %}
+            <td> </td>
+            {% endif %}
+            {% endfor %}
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 <br>
 
-<div name="instagram" style="border:2px solid black" align="center"> <br>
-    <h1> Check out what your neighbors are posting to Instagram!</h1> <br>
+<div name="instagram" class="container" align="center"> <br>
+    <h1 style="text-align:center; background-color:#337ab7; color:white">Instagram</h1> <br>
     <ul type="square">
     {% for pic in lst_local_insta %}
     <img src= {{pic}}>
@@ -115,23 +144,77 @@
 </div>
 
 
-<div name="four_square" style="border:2px solid black" align="center"> <br>
-<h1> Check out where your neighbors are checking in!</h1> <br>
-    <table align="center" border="1" rules="rows">
-    <tr>
-        <th class="th">Location</th>
-        <th>  </th>
-        <th class="th">Currently Checked-in</th>
-    </tr>
+<div name="four_square" class="container" align="center"> <br>
+    <h1 style="text-align:center; background-color:#337ab7; color:white"> Foursquare</h1> <br>
+    <table class="table-condensed table-striped table-responsive">
+        <h3> These places are popular and open right now</h2> <br>
+        <thread>
+            <tr>
+                <th class="th">Location</th>
+                <th>  </th>
+                <th class="th">Currently Here</th>
+            </tr>
+        </thread>
+        <tbody>
+        {% for key, value in lst_four_square_trending.iteritems() %}
+        <tr>
+            <td>  {{ key }} </td>
+            <td style="padding:10px">  </td>
+            <td> {{value}} </td>
+            {% endfor %}
+        </tr>
+        </tbody>
+    </table>
 
-    {% for key, value in lst_four_square.iteritems() %}
-  <tr>
-      <td>  {{ key }} </td>
-      <td style="padding:10px">  </td>
-      <td> {{value}} </td>
-      {% endfor %}
-  </tr>
-</table>
+    <table class="table-condensed table-striped table-responsive">
+        <h3> These places also have been popular recently and are open now</h3> <br>
+        <thread>
+            <tr>
+                <th class="th">Location</th>
+                <th class="th" style="text-align:center">  Rating </th>
+                <th> </th>
+                <th class="th">Currently Here</th>
+            </tr>
+        </thread>
+        <tbody>
+        {% for key, value in lst_four_square_explore.iteritems() %}
+        <tr>
+            <td>  {{ key }} </td>
+            <td style="text-align:center"> {{value[0]}} </td>
+            <td style="padding:10px">  </td>
+            <td> {{value[1]}} </td>
+            {% endfor %}
+        </tr>
+        </tbody>
+    </table>
 </div>
+
+
+
+<div name="events" class="table-condensed table-striped table-responsive container" align="center"> <br>
+    <h1 style="text-align:center; background-color:#337ab7; color:white"> Local Events</h1> <br>
+    <table class="table-condensed table-responsive table-striped" style="white-space: nowrap" align="center">
+        <h3> Check out these local events </h3>
+        <thread>
+            <tr>
+                <th class="th"> Event </th>
+                <th class="th"> Venue </th>
+                <th class="th"> Start Date/Time </th>
+            </tr>
+        </thread>
+        <tbody>
+        {% for event in lst_events %}
+        <tr>
+            <td> <a href="{{event[3]}}">
+                {{event[0]}} </a>
+            </td>
+            <td> {{event[1]}} </td>
+            <td> {{event[2]}}</td>
+            {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 
 {% endblock %}

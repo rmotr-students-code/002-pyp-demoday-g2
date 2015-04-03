@@ -8,11 +8,6 @@ def setup_page_dict():
     the web page. Add the name and address of every new page here"""
     page_dict = collections.OrderedDict()
     page_dict['Home'] = '/'
-<<<<<<< HEAD
-=======
-    page_dict['Registration'] = '/Registration'
-    page_dict['Contact'] = '/Contact'
->>>>>>> MRA
     return page_dict
 
 @app.route('/', methods=['GET', 'POST'])
@@ -36,7 +31,6 @@ def index_page():
                                page_dict=setup_page_dict(),
                                app_name=app.config['APP_NAME'],
                                lst_local_tweets=lst_local_tweets,
-<<<<<<< HEAD
                                lst_trending_tweets=lst_trending_tweets,
                                lst_local_insta=lst_local_insta,
                                lst_four_square_trending=lst_four_square_trending,
@@ -45,24 +39,3 @@ def index_page():
                                st_address = st_address,
                                city = city,
                                state = state)
-=======
-                               lst_local_insta=lst_local_insta,
-                               st_address = st_address,
-                               city = city,
-                               state = state)
-
-@app.route('/Registration', methods=['GET', 'POST'])
-def registration():
-    form = RegistrationForm(request.form)
-    if request.method == 'POST' and form.validate():
-        add_to_database(form.username.data, form.password.data,
-                        form.first_name.data, form.last_name.data)
-        flash('Welcome {first_name}!'.format(first_name=form.first_name.data))
-        return redirect('/')
-    return render_template('registration.html', title='Registration',
-                           page_dict=setup_page_dict(),
-                           chosen_media=app.config['CHOSEN_MEDIA'],
-                           form=form)
-
-
->>>>>>> MRA

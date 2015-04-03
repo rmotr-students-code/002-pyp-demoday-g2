@@ -2,7 +2,6 @@ import requests
 from instagram.client import InstagramAPI
 import foursquare
 import tweepy
-<<<<<<< HEAD
 import eventful
 import pylast
 from eventbrite import Eventbrite
@@ -31,12 +30,6 @@ Last_fm_Secret = '4ea3db3bb840ff0ef8e84021425068d1'
 Eventbrite_API = "HURARHPPK3AG2G5WJR3H"
 
 ###  -----  API Class  -----   ###
-=======
-from instance.config import Google_API, Insta_Client_ID, \
-    Insta_Client_Secret
-from instance.config import Twitter_API_Key, Twitter_API_Secret, \
-                            Twitter_Token, Twitter_Token_Secret
->>>>>>> MRA
 
 class GlocalAPI:
     def __init__(self, st_address, city, state, miles='1'):

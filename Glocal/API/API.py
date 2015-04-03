@@ -32,17 +32,20 @@ Eventbrite_API = "HURARHPPK3AG2G5WJR3H"
 ###  -----  API Class  -----   ###
 
 class GlocalAPI:
+    """
+    GlocalAPI class takes an address and radius as parameters and returns
+    class attributes latitude and longitude coordinates for use to query
+    social media APIs.
+    """
+
     def __init__(self, st_address, city, state, miles='1'):
+        """ Initializes GlocalAPI class instance by generating latitude, longitude
+        data using Google Maps API
+        """
         self.st_address = st_address
         self.city = city
         self.state = state
         self.miles = miles
-
-        """
-        GlocalAPI class takes an address and radius as parameters and returns
-        class attributes latitude and longitude coordinates for use to query
-        social media APIs.
-        """
 
         # Request of Google Maps API to convert address into latitude, longitude
         r = requests.get(
@@ -58,18 +61,21 @@ class GlocalAPI:
         self.latitude = data['results'][0]['geometry']['location']['lat']
         self.longitude = data['results'][0]['geometry']['location']['lng']
 
+
     ###  -----  Return Latitude and Longitude  -----   ###
     def get_coordinates(self):
+        """ Returns latitude, longitude """
         return self.latitude, self.longitude
 
     ###  -----  Twitter API  -----   ###
     def get_twitter(self):
-        # Queries Twitter and returns tweets and trending topics within an area
-        # based on geo parameters
+        """
+        Queries Twitter and returns tweets and trending topics within an area
+        based on geo parameters
+        """
         self.auth = tweepy.OAuthHandler(Twitter_API_Key, Twitter_API_Secret)
         self.auth.set_access_token(Twitter_Token, Twitter_Token_Secret)
         self.twitter_api = tweepy.API(self.auth)
-
 
         ###  -----  Local Tweets  -----   ###
 
@@ -107,7 +113,9 @@ class GlocalAPI:
 
     ###  -----  Instagram API  -----   ###
     def get_instagram(self):
-        # Queries Instagram and returns images within an area based on geo parameters
+        """
+        Queries Instagram and returns images within an area based on geo parameters
+        """
         instagram_api = InstagramAPI(client_id=Insta_Client_ID,
                                      client_secret=Insta_Client_Secret)
         # converts user's miles radius input into meters
@@ -123,13 +131,14 @@ class GlocalAPI:
 
 
     def get_four_square(self):
-        # Queries Four Square and returns trending and popular venues within an
-        # area based on geo parameters
+        """
+        Queries Four Square and returns trending and popular venues
+        within an area based on go parameters
+        """
         client = foursquare.Foursquare(client_id=FrSquare_Client_ID,
                                        client_secret=FrSquare_Client_Secret)
         # converts user's miles radius input into meters
         dist_meters = str(float(self.miles) * 1603.34)
-
 
         ###  -----  Trending Venues  -----   ###
 
@@ -181,14 +190,15 @@ class GlocalAPI:
 
     ###  -----  Event APIs  -----   ###
     def get_events(self):
-        # Queries Eventful, LastFM, and Eventbrite and returns events within an
-        # area based on geo parameters
+        """
+        Queries Eventful, LastFM, and Eventbrite APIs and returns events
+        within an area based on geo parameters
+        """
 
         # Datetime format for event start date/time
         datetime_format = '%b %d,%Y -- %I:%M %p'
 
         lst_events = []
-
 
         ###  -----  Eventful  -----   ###
 
@@ -232,7 +242,6 @@ class GlocalAPI:
                 tmp_event.append(eventful_events['events']['event']['url'])
                 lst_events.append(tmp_event)
 
-
         ###  -----  LastFM  -----   ###
 
         # Queries LastFM API and returns events within an area based on geo
@@ -270,7 +279,9 @@ class GlocalAPI:
         # Queries Eventbrite API and returns events within an area based on geo
         # parameters.
         eventbrite = Eventbrite(Eventbrite_API)
-        eventbrite_within = str(int(float(self.miles)))
+        # Eventbrite API requires radius ('within' param) to be integer
+        # not less than 1.
+        eventbrite_within = max('1', str(int(float(self.miles))))
         eventbrite_events = eventbrite.event_search(**{'location.within':eventbrite_within + "mi",
                                                        'location.latitude':str(self.latitude),
                                                        'location.longitude':str(self.longitude),
@@ -278,9 +289,9 @@ class GlocalAPI:
                                                        'sort_by':'date'})
 
         # Appends Eventbrite event details to 'lst_events' list. Exception handling
-        # in case no events are found or etracting certain event details creates
+        # in case no events are found or extracting certain event details creates
         # an error
-        for i in xrange(20):
+        for i in range(len(eventbrite_events)):
             try:
                 tmp_event = []
                 tmp_time = []
@@ -297,12 +308,3 @@ class GlocalAPI:
 
         # Events in lst_events are sorted by chronological order
         return sorted(lst_events, key=lambda x: datetime.strptime(x[-2], datetime_format))
-
-
-# x = GlocalAPI("1500 Massachusetts Ave NW", "washington","dc","1" )
-# x.get_instagram()
-# x.get_events()
-# # # # # y = GlocalAPI("","Sanaa","Yemen","10")
-# # # y.get_events()
-# # z = GlocalAPI("42 mar elias street","al-mina, tripoli", "lebanon","5")
-# z.get_events()

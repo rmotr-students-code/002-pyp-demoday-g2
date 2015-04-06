@@ -19,7 +19,7 @@ Google_API = 'AIzaSyDBpDaj4GWXn8ApFULeB0GkvYTLWROpxVA'
 Insta_Client_ID = "ed547816012648db9011d08fc0df709f"
 Insta_Client_Secret = "d7e8ffe769074807b630942796d8d0d7"
 
-FrSquare_Client_ID ="0CVJC4C44DABYTEWSG3DR54AIFAK53NZJ3KVZL1B0CBZXVSE"
+FrSquare_Client_ID = "0CVJC4C44DABYTEWSG3DR54AIFAK53NZJ3KVZL1B0CBZXVSE"
 FrSquare_Client_Secret = "FTJZCTBXGVA4FGFULBSW11HZECTU3Z3SSYSDLCWED3IYAROT"
 
 Eventful_Key = "g8PVTcPJbmnRdtdt"
@@ -31,6 +31,7 @@ Eventbrite_API = "HURARHPPK3AG2G5WJR3H"
 
 ###  -----  API Class  -----   ###
 
+
 class GlocalAPI:
     """
     GlocalAPI class takes an address and radius as parameters and returns
@@ -38,29 +39,35 @@ class GlocalAPI:
     social media APIs.
     """
 
-    def __init__(self, st_address, city, state, miles='1'):
+    def __init__(self, st_address, city, state, miles, latitude=None, longitude=None):
         """ Initializes GlocalAPI class instance by generating latitude, longitude
         data using Google Maps API
         """
         self.st_address = st_address
         self.city = city
         self.state = state
-        self.miles = miles
+        self.miles = miles if miles > '0' else '1'
 
+        # Conditional that determines if user is using the 'Find My Location'
+        # feature or has entered a specific address
+        if latitude and longitude:
+            self.latitude = str(latitude)
+            self.longitude = str(longitude)
+
+        else:
         # Request of Google Maps API to convert address into latitude, longitude
-        r = requests.get(
-            'https://maps.googleapis.com/maps/api/geocode/json?address=' +
-            self.st_address + '+' + self.city + ',+' + self.state
-            + '&sensor=FALSE' + Google_API)
+            r = requests.get(
+                'https://maps.googleapis.com/maps/api/geocode/json?address=' +
+                self.st_address + '+' + self.city + ',+' + self.state
+                + '&sensor=FALSE' + Google_API)
 
-        # Converts the data into readable json format
-        data = r.json()
+            # Converts the data into readable json format
+            data = r.json()
 
-        # Pulls the latitude, longitude coordinates from a long stream of json data
-        # that includes information other than the coordinates.
-        self.latitude = data['results'][0]['geometry']['location']['lat']
-        self.longitude = data['results'][0]['geometry']['location']['lng']
-
+            # Pulls the latitude, longitude coordinates from a long stream of json data
+            # that includes information other than the coordinates.
+            self.latitude = data['results'][0]['geometry']['location']['lat']
+            self.longitude = data['results'][0]['geometry']['location']['lng']
 
     ###  -----  Return Latitude and Longitude  -----   ###
     def get_coordinates(self):
@@ -104,10 +111,10 @@ class GlocalAPI:
         lst_trending_tweets = []
         for i in range(len(lst_trending_woeid)):
             trending_topics = (self.twitter_api.trends_place(lst_trending_woeid[i]))
-            for i in range(len(trending_topics)):
-                trending_topics_2 = trending_topics[i]
-                for i in range(len(trending_topics_2)):
-                    lst_trending_tweets.append(trending_topics_2['trends'][i]['name'])
+            for z in range(len(trending_topics)):
+                trending_topics_2 = trending_topics[z]
+                for x in range(len(trending_topics_2)):
+                    lst_trending_tweets.append(trending_topics_2['trends'][x]['name'])
 
         return lst_local_tweets, lst_trending_tweets
 
@@ -299,7 +306,7 @@ class GlocalAPI:
                 tmp_event.append(eventbrite_events['events'][i]['venue']['name'][:20])
                 # converts datetime format
                 tmp_time = eventbrite_events['events'][i]['start']['local']
-                tmp_time_adj = datetime.strptime(tmp_time,'%Y-%m-%dT%H:%M:%S').strftime(datetime_format)
+                tmp_time_adj = datetime.strptime(tmp_time, '%Y-%m-%dT%H:%M:%S').strftime(datetime_format)
                 tmp_event.append(tmp_time_adj)
                 tmp_event.append(eventbrite_events['events'][i]['url'])
                 lst_events.append(tmp_event)
@@ -308,3 +315,12 @@ class GlocalAPI:
 
         # Events in lst_events are sorted by chronological order
         return sorted(lst_events, key=lambda x: datetime.strptime(x[-2], datetime_format))
+
+
+# x = GlocalAPI("1500 Massachusetts Ave NW", "washington","dc","1" )
+# # # # x.get_instagram()
+# x.get_events()
+# # # # # y = GlocalAPI("","Sanaa","Yemen","10")
+# # # y.get_events()
+# # z = GlocalAPI("42 mar elias street","al-mina, tripoli", "lebanon","5")
+# z.get_events()

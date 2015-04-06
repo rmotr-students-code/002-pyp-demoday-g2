@@ -6,6 +6,7 @@
     <header id="top" class="header">
         <div class="text-vertical-center">
             <h1>Welcome to Glocal</h1>
+            <h2> Explore neighborhoods around the world from your computer </h2>
             <br>
             <a href="#address" class="btn btn-dark btn-lg">Let's Explore</a>
         </div>
@@ -16,7 +17,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 col-lg-offset-1 text-center">
-                    <h2>Which Block Should We Explore First?</h2>
+                    <h2>Which Neighborhood Should We Explore First?</h2>
                 </div>
             </div>
             <!-- /.row -->
@@ -35,7 +36,7 @@
                         <div class="col-lg-10 col-sm-10">
                             <div class="service-item">
                                 <div class = "container">
-                                    <form class="form-horizontal" role="form" method="POST">
+                                    <form class="form-horizontal" role="form" method="POST" id="myForm">
                                     <div class="form-group">
                                     <label class="control-label col-sm-2" for="st_address">Address:</label>
                                     <div class="col-sm-8 col-lg-5">
@@ -59,13 +60,16 @@
                                     <div class="col-sm-8 col-lg-5">
                                         <input type="text" class="form-control" name="miles" id="miles" placeholder="1.5">
                                     </div>
-                                </div>
-                                    <div class="form-group">
-                                    <div class="col-sm-9">
-                                        <button type="submit" class="btn btn-default">Submit</button>
                                     </div>
-                                </div>
-                                </form>
+                                        <div class="form-group">
+                                            <div class="col-sm-9">
+                                                <button type="submit" class="btn btn-default"> Submit </button>
+                                                <button onclick="getLocation()" class="btn btn-default"> Find My Location </button>
+                                                <input type="hidden" name="latitude" id="latitude" />
+                                                <input type="hidden" name="longitude" id="longitude" />
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -74,6 +78,18 @@
             </div>
         </div>
     </section>
+
+<script>
+function getLocation() {
+    navigator.geolocation.getCurrentPosition(showPosition);
+}
+
+function showPosition(position) {
+    document.getElementById('latitude').value = position.coords.latitude;
+    document.getElementById('longitude').value = position.coords.longitude;
+    document.getElementById('myForm').submit();
+}
+</script>
 
 
 {% endblock %}
